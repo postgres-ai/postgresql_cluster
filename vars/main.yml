@@ -113,7 +113,7 @@ postgresql_parameters:
   - {option: "checkpoint_timeout", value: "30min"}
   - {option: "checkpoint_completion_target", value: "0.9"}
   - {option: "min_wal_size", value: "2GB"}  # for PostgreSQL 9.5 and above (for 9.4 use "checkpoint_segments")
-  - {option: "max_wal_size", value: "64GB"}  # for PostgreSQL 9.5 and above (for 9.4 use "checkpoint_segments")
+  - {option: "max_wal_size", value: "4GB"}  # for PostgreSQL 9.5 and above (for 9.4 use "checkpoint_segments")
   - {option: "wal_buffers", value: "32MB"}
   - {option: "default_statistics_target", value: "1000"}
   - {option: "seq_page_cost", value: "1"}
