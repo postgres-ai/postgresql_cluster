@@ -140,7 +140,7 @@ postgresql_parameters:
   - {option: "max_replication_slots", value: "10"}
   - {option: "hot_standby", value: "on"}
   - {option: "wal_log_hints", value: "on"}
-  - {option: "shared_preload_libraries", value: "pg_stat_statements,pg_stat_kcache,pg_wait_sampling"}
+  - {option: "shared_preload_libraries", value: "pg_stat_statements,pg_wait_sampling"}
   - {option: "pg_stat_statements.max", value: "10000"}
   - {option: "pg_stat_statements.track", value: "all"}
   - {option: "pg_stat_statements.save", value: "off"}
