@@ -22,6 +22,7 @@ apt_repository_keys:
   - key: "https://www.postgresql.org/media/keys/ACCC4CF8.asc"  # postgresql repository apt key
 apt_repository:
   - repo: "deb https://apt.postgresql.org/pub/repos/apt/ {{ ansible_distribution_release }}-pgdg main"  # postgresql apt repository
+  - repo: "deb https://apt.postgresql.org/pub/repos/apt/ {{ ansible_distribution_release }}-pgdg main 14" # to install 14beta3 or later
 #  - repo: "deb https://deb.debian.org/debian/ {{ ansible_distribution_release }} main"  # debian repo (optional)
 #  - repo: "deb https://deb.debian.org/debian/ {{ ansible_distribution_release }}-updates main"  # debian repo (optional)
 #  - repo: "deb https://security.debian.org/debian-security/ {{ ansible_distribution_release }}/updates main"  # debian repo (optional)
@@ -48,12 +49,19 @@ system_packages:
   - jq
   - iptables
   - acl
+  - moreutils
+  - libpq-dev
+  - linux-tools-common
+  - linux-tools-5.4.0-1045-aws # ubuntu 20.04
 
 postgresql_packages:
   - postgresql-{{ postgresql_version }}
   - postgresql-client-{{ postgresql_version }}
   - postgresql-server-dev-{{ postgresql_version }}
   - postgresql-contrib-{{ postgresql_version }}
+  - postgresql-{{ postgresql_version }}-pg-wait-sampling
+  - postgresql-{{ postgresql_version }}-pg-stat-kcache
+  - postgresql-{{ postgresql_version }}-dbgsym
 #  - postgresql-{{ postgresql_version }}-repack"
 
 # Extra packages
@@ -128,6 +136,8 @@ patroni_pip_package_repo: []
 patroni_deb_package_repo: []
 #  - "https://apt.postgresql.org/pub/repos/apt/pool/main/p/patroni/patroni_1.6.5-2.pgdg100%2B1_all.deb"  # (package for Debian 10)
 
+# pgcenter
+pgcenter_deb_package_file: "https://github.com/lesovsky/pgcenter/releases/download/v0.9.2/pgcenter_0.9.2_linux_amd64.deb"
 
 # ================================================================================================= #
 # (optional) if installation_method: "file"
@@ -177,7 +187,8 @@ haproxy_src_file: "haproxy-1.8.20.tar.gz"  # http://www.haproxy.org/download/1.8
 # ------------------------------------------------------------------------------------------------- #
 # (optional) Specify additional deb packages if required (for any installation_method)
 # this packages will be installed before all other packages.
-packages_from_file: []
+packages_from_file:
+   - "pgcenter_0.9.2_linux_amd64.deb"
 #  - "my-package-name_1_amd64.deb"
 #  - "my-package-name_2_amd64.deb"
 #  - ""
